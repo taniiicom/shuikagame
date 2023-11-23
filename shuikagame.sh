@@ -55,11 +55,11 @@ function display_field() {
 # フルーツの落下
 function drop_fruit() {
     local x=$cursor
-    local y=0
+    local y=1
     while [[ $y -lt 21 ]]; do
         index=$((y * 100 + x))
         pixel=${field[index]}
-        if pixel != "　"; then
+        if [ "$pixel" != "　" ]; then
             break
         fi
         ((y++))
