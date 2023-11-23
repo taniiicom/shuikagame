@@ -35,6 +35,7 @@ function display_field() {
     echo "Current Fruit: ${fruits[1]}"
     echo "Move Cursor: [s] Left, [d] Right"
     echo "Drop Fruit: Space or Enter"
+    echo "Circle of Evolution: ${fruits[1]} → ${fruits[2]} → ${fruits[3]} → ${fruits[4]} → ${fruits[5]} → ${fruits[6]} → ${fruits[7]} → ${fruits[8]} → ${fruits[9]} → ${fruits[10]}"
 }
 
 # フルーツの落下
@@ -60,6 +61,6 @@ while true; do
     case "$key" in
         $'s') ((cursor = cursor > 0 ? cursor - 1 : cursor));;
         $'d') ((cursor = cursor < 19 ? cursor + 1 : cursor));;
-        $'\n' | " ") drop_fruit();;
+        $'\n' | " ") drop_fruit;;
     esac
 done
