@@ -19,6 +19,7 @@ cursor=10
 
 # 現在のフルーツ
 fruit=${fruits[0]}
+nextfruit=${fruits[$((RANDOM % 11))]}
 
 # ゲームフィールドの表示
 function display_field() {
@@ -26,7 +27,7 @@ function display_field() {
     row="　"
     for j in {1..20}; do
         if [[ $j -eq $cursor ]]; then
-            row+="↓⛅️"
+            row+="↓⛅️[$fruit]"
         else
             row+="　"
         fi
@@ -45,6 +46,7 @@ function display_field() {
     done
     echo "└────────────────────────────────────────┘"
     echo "Current Fruit: $fruit"
+    echo "Next: $nextfruit"
     echo "Move Cursor: [s] Left, [d] Right"
     echo "Drop Fruit: [m] or Space or Enter"
     echo "Circle of Evolution: ${fruits[0]} → ${fruits[1]} → ${fruits[2]} → ${fruits[3]} → ${fruits[4]} → ${fruits[5]} → ${fruits[6]} → ${fruits[7]} → ${fruits[8]} → ${fruits[9]} → ${fruits[10]}"
@@ -69,7 +71,8 @@ function drop_fruit() {
     done
 
     # 次のフルーツを設定
-    fruit=${fruits[$((RANDOM % 11))]}
+    fruit=$nextfruit
+    nextfruit=${fruits[$((RANDOM % 11))]}
 }
 
 # ゲームループ
