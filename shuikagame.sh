@@ -1,16 +1,17 @@
-#!/bin/zsh
+#!/bin/bash
 
 # フルーツの絵文字
 fruits=("🍒" "🍓" "🍇" "🍊" "🦪" "🍎" "🍐" "🍑" "🍍" "🍈" "🍉")
 
-# ゲームフィールドの初期化
-field=()
-for (( i = 0; i < 20; i++ )); do
-    row=()
-    for (( j = 0; j < 20; j++ )); do
-        row+=( " " )
+# 連想配列の宣言
+declare -a field
+
+# ゲームフィールド配列の初期化
+for i in {1..20}; do
+    for j in {1..20}; do
+        index=$((i * 100 + j))
+        field[index]="　"
     done
-    field+=("${(j:,:)row}")
 done
 
 # カーソルの位置
@@ -19,9 +20,18 @@ cursor=10
 # ゲームフィールドの表示
 function display_field() {
     clear
-    for row in "${field[@]}"; do
+    echo "┌────────────────────────────────────────┐"
+    for i in {1..20}; do
+        row="|"
+        for j in {1..20}; do
+            index=$((i * 100 + j))
+            pixel=${field[index]}
+            row+=$pixel
+        done
+        row+="|"
         echo "$row"
     done
+    echo "└────────────────────────────────────────┘"
     echo "Current Fruit: ${fruits[1]}"
     echo "Move Cursor: [s] Left, [d] Right"
     echo "Drop Fruit: Space or Enter"
@@ -29,12 +39,18 @@ function display_field() {
 
 # フルーツの落下
 function drop_fruit() {
-    local x=$cursor
+    local x=$(cursor + 1)
     local y=0
-    while [[ $y -lt 19 && "${field[$y + 1][$x]}" == " " ]]; do
+    while [[ $y -lt 19 ]]; do
+        index=$((i * 100 + j))
+        pixel=${field[index]}
+        if pixel != "　"; then
+            break
+        fi
         ((y++))
+        field[index]=$fruits[1]
+        display_field
     done
-    field[$y]=$cursor:🍒
 }
 
 # ゲームループ
@@ -44,7 +60,6 @@ while true; do
     case "$key" in
         $'s') ((cursor = cursor > 0 ? cursor - 1 : cursor));;
         $'d') ((cursor = cursor < 19 ? cursor + 1 : cursor));;
-        $'\n' | " ") drop_fruit;;
+        $'\n' | " ") drop_fruit();;
     esac
 done
-
