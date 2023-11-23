@@ -12,8 +12,8 @@ sudo sh shuikagame.sh
 ```
 
 ## license
-MIT License
-(c) 2023 Taniii.com
+MIT License  
+(c) 2023 Taniii.com  
 https://opensource.org/license/mit/
 
 This software is a fanmade creation inspired by the 'Suika Game' from Aladdin X.
