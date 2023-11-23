@@ -1,3 +1,18 @@
+# Shuika Game
+# a Command-Line Suika Game that runs on "sh" (shell script).
+# 
+# MIT License
+# (c) 2023 Taniii.com
+# https://opensource.org/license/mit/
+#
+# Links
+# Web: https://taniii.com
+# Twitter: https://twitter.com/taniiicom
+# GitHub: https://github.com/taniiicom/shuikagame
+#
+# This software is a fanmade creation inspired by the 'Suika Game' from Aladdin X.
+# https://www.aladdinx.jp/pages/suika-game
+
 #!/bin/bash
 
 # フルーツの絵文字
